@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    minWidth: 320,
+    minWidth: 350,
     maxWidth: 400,
   },
   content: {

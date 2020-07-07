@@ -19,6 +19,7 @@ function App() {
   const [location, setLocation] = useState(null)
   const [alert, setAlert] = useState({ onClose: () => {}, alertText: null })
 
+  // Gets called on mount. Checks for location from browser and defaults to Intuit building on fail.
   useEffect(() => {
     if (!navigator || !navigator.geolocation) {
       setLocation({
@@ -41,12 +42,12 @@ function App() {
     navigator.geolocation.getCurrentPosition((res) => setLocation(res.coords), getLocationError)
   }, []);
 
+  // Gets called when location changes. Makes call to fetch station data. If fails we use stationData file.
   useEffect(() => {
     if (location) {
       const { latitude, longitude } = location;
       const getGasStations = async () => {
-        console.log('location', location)
-        const stationData = await fetch(
+        await fetch(
           `http://api.mygasfeed.com/stations/radius/${latitude}/${longitude}/5/reg/distance/bjbt75bubr.json`,
           {
             method: 'GET',
@@ -67,6 +68,7 @@ function App() {
     }
   }, [location]);
 
+  // Maps and renders out GasCards for each station in our list.
   const getGasCards = () => {
     return gasStations.map((station, index) => {
       return (
@@ -77,19 +79,19 @@ function App() {
       );
     });
   };
-  // console.log(gasStations)
+
   return (
     <div className="App">
       <Alert {...alert} />
+      <h2>GasPal</h2>
       <Grid
         className={classes.root}
         container
-        direction="column"
+        direction="row"
         justify="center"
         alignItems="center"
         spacing={2}
       >
-        <h2>GasPal</h2>
         {gasStations.length ? getGasCards() : <CircularProgress />}
       </Grid>
     </div>
