@@ -1,0 +1,4 @@
+1. Host and serve using HTTPS with trusted ssl certificate. This will ensure that the geolocation API will function correctly across all browsers.
+2. Once using Node server to serve project, change fetch for stations to occur on backend instead of frontend. This will allow us to hide our API key and let the backend handle the data fetching securely.
+3. Add ability for user to input a custom location using a geo enabled input from MapBox. I think this would give the user more flexibility and allow them to use the app without giving us their location. 
+4. Add functionality for sort by price, type of gas, radius. The api already supports this so we get it for free.
